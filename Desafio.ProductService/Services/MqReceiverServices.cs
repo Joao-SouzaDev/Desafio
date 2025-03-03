@@ -32,7 +32,7 @@ namespace Desafio.ProductService.Services
         {
             var body = @event.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            var userId = Guid.NewGuid();
+            var userId = Guid.Parse(message);
             var productOwner = new ProductOwner(userId);
             using(var scope = _service.CreateScope())
             {

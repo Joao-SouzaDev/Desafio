@@ -16,8 +16,6 @@ namespace InsightLoop.ProductService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

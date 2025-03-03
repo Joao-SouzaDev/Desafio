@@ -1,4 +1,5 @@
 using Desafio.AuthService.Helpers;
+using Desafio.AuthService.Migrations;
 using Desafio.AuthService.Models;
 using Desafio.AuthService.Services;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +19,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.ApplyMigrations();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

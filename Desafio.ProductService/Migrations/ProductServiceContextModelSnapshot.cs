@@ -22,7 +22,7 @@ namespace InsightLoop.ProductService.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("InsightLoop.ProductService.Models.Product", b =>
+            modelBuilder.Entity("Desafio.ProductService.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,31 +50,23 @@ namespace InsightLoop.ProductService.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("InsightLoop.ProductService.Models.ProductOwner", b =>
+            modelBuilder.Entity("Desafio.ProductService.Models.ProductOwner", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("ProductOwners");
                 });
 
-            modelBuilder.Entity("InsightLoop.ProductService.Models.Product", b =>
+            modelBuilder.Entity("Desafio.ProductService.Models.Product", b =>
                 {
-                    b.HasOne("InsightLoop.ProductService.Models.ProductOwner", "ProductOwner")
+                    b.HasOne("Desafio.ProductService.Models.ProductOwner", "ProductOwner")
                         .WithMany("Products")
                         .HasForeignKey("ProductOwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -83,7 +75,7 @@ namespace InsightLoop.ProductService.Migrations
                     b.Navigation("ProductOwner");
                 });
 
-            modelBuilder.Entity("InsightLoop.ProductService.Models.ProductOwner", b =>
+            modelBuilder.Entity("Desafio.ProductService.Models.ProductOwner", b =>
                 {
                     b.Navigation("Products");
                 });

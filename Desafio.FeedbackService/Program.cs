@@ -1,4 +1,5 @@
 using Desafio.FeedbackService.Helpers;
+using Desafio.FeedbackService.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.ApplyMigrations();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

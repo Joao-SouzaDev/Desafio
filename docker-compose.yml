@@ -1,0 +1,53 @@
+services:
+  desafio.feedbackservice:
+    image: ${DOCKER_REGISTRY-}desafiofeedbackservice
+    build:
+      context: .
+      dockerfile: Desafio.FeedbackService/Dockerfile
+    ports:
+      - "5004:5004"
+      - "5005:5005"
+  desafio.productservice:
+    image: ${DOCKER_REGISTRY-}desafioproductservice
+    build:
+      context: .
+      dockerfile: Desafio.ProductService/Dockerfile
+    ports:
+      - "5002:5002"
+      - "5003:5003"
+    depends_on:
+          - desafio.database
+          - rabbitmq
+  desafio.authservice:
+    image: ${DOCKER_REGISTRY-}desafioauthservice
+    build:
+      context: .
+      dockerfile: Desafio.AuthService/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"  
+  desafio.database:
+   image: postgres:latest
+   container_name: desafio.database
+   environment:
+    - POSTGRES_USER=postgres 
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=desafio
+   volumes:
+    - ./.containers/desafio.database:/var/lib/postgresql/data 
+   ports:
+    - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: desafio.rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+     - ./.containers/desafio.rabbitmq:/var/lib/rabbitmq
+
+
+
+
+
