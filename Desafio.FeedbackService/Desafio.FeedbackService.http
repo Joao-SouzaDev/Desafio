@@ -1,0 +1,6 @@
+@Desafio.FeedbackService_HostAddress = http://localhost:5092
+
+GET {{Desafio.FeedbackService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
