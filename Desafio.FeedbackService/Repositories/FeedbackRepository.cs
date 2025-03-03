@@ -34,6 +34,10 @@ namespace Desafio.FeedbackService.Repositories
         {
             return _context.Feedbacks.FirstOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<IEnumerable<Feedback?>> GetByProductIdAsync(Guid id)
+        {
+            return (await _context.Feedbacks.ToListAsync()).Where(x => x.ProductId == id);
+        }
 
         public async Task UpdateAsync(Feedback request)
         {

@@ -10,13 +10,6 @@ namespace InsightLoop.ProductService.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Email",
-                table: "ProductOwners");
-
-            migrationBuilder.DropColumn(
-                name: "UserName",
-                table: "ProductOwners");
         }
 
         /// <inheritdoc />

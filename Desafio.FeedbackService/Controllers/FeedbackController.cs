@@ -38,6 +38,13 @@ namespace Desafio.FeedbackService.Controllers
             var feedbacksResponse = _mapper.Map<IEnumerable<GetFeedbackResponse>>(feedbacks);
             return Ok(feedbacksResponse);
         }
+        [HttpGet("{productId}/feedbacks")]
+        public async Task<IActionResult> GetFeedbacksByProductId(Guid productId)
+        {
+            var feedbacks = (await _feedbackService.GetFeedbacksByProductIdAsync(productId)).ToList();
+            var feedbacksResponse = _mapper.Map<List<GetFeedbackResponse>>(feedbacks);
+            return Ok(feedbacksResponse);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFeedbackById(Guid id)
         {

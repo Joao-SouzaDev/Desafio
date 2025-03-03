@@ -30,9 +30,13 @@ namespace Desafio.FeedbackService.Services
         {
             return await _feedbackRepository.GetAllAsync();
         }
-        public async Task<Feedback> GetFeedbackByIdAsync(Guid feedbackId)
+        public async Task<Feedback?> GetFeedbackByIdAsync(Guid feedbackId)
         {
             return await _feedbackRepository.GetByIdAsync(feedbackId);
+        }
+        public async Task<IEnumerable<Feedback?>> GetFeedbacksByProductIdAsync(Guid productId)
+        {
+            return (await _feedbackRepository.GetByProductIdAsync(productId)).ToList();
         }
         public async Task UpdateFeedbackAsync(Feedback request)
         {

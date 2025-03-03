@@ -2,7 +2,18 @@ using Desafio.FeedbackService.Helpers;
 using Desafio.FeedbackService.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var corsPolicy = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: corsPolicy,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000") // Permitir chamadas do React
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -23,7 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(corsPolicy);
 app.UseAuthorization();
 
 app.MapControllers();

@@ -9,6 +9,7 @@ namespace Desafio.FeedbackService.Models.Profiles
         {
             CreateMap<CreateAnswerRequest, Answer>();
             CreateMap<Answer, GetAnswerResponse>();
+            CreateMap<GetAnswerResponse, Answer>();
         }
     }
 }
