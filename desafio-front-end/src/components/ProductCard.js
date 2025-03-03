@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Modal, Box, Button, TextField, Rating } from "@mui/material";
+import { Card, CardContent, Typography, Modal, Box, Button, TextField, Rating, CardMedia } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "../services/apifeedback";
 
@@ -34,9 +34,15 @@ function ProductCard({ product }) {
   return (
     <>
       <Card 
-        sx={{ maxWidth: 300, backgroundColor: "#e8f5e9", borderRadius: 2, cursor: "pointer" }} 
+        sx={{ maxWidth: 450, backgroundColor: "#e8f5e9", borderRadius: 2, cursor: "pointer" }} 
         onClick={() => setOpen(true)}
       >
+        <CardMedia 
+            component="img"
+            height="200"
+            image={product.imageUrl}
+            alt={product.name}
+        />
         <CardContent>
           <Typography variant="h6" color="primary">
             {product.name}
@@ -58,7 +64,7 @@ function ProductCard({ product }) {
             p: 4,
             borderRadius: 2,
             boxShadow: 24,
-            maxHeight: "80vh", // Define altura máxima
+            maxHeight: "60vh", // Define altura máxima
             overflowY: "auto" // Habilita o scroll
           }}
         >
