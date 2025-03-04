@@ -2,11 +2,13 @@ import { useState } from "react";
 import axios from "../services/apiauth";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import Cookies from "js-cookie";
+import RegisterModal from "../components/RegisterModal";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
   
     const handleLogin = async (e) => {
@@ -59,6 +61,9 @@ function Login() {
             <Button fullWidth variant="contained" color="success" type="submit" sx={{ mt: 2 }}>
               Entrar
             </Button>
+            <Button onClick={() => setOpen(true)} sx={{ mt: 2 }}>Cadastrar</Button>
+
+            <RegisterModal open={open} onClose={() => setOpen(false)} />
           </form>
         </Box>
       </Container>

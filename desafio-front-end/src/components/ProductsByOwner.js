@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Box, Card, CardContent, Typography,CardMedia,Container,Grid } from "@mui/material";
+import { Box, Card, CardContent, Typography,CardMedia,Container,Grid, Button } from "@mui/material";
 import axios from "../services/apiproduct";
 import Cookies from "js-cookie";
+import ProductModal from "./ProductModal";
 
 function MyProducts() {
   const [products, setProducts] = useState([]);
   const [ownerId, setOwnerId] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,12 +35,13 @@ function MyProducts() {
   }, []);
 
   return (
-    <Container sx={{ mt: 1 }}>
+    <Container sx={{ mt: 1, ml: 3 }}>
     <Box>
       <Typography variant="h5" gutterBottom>Meus Produtos</Typography>
+      <Button variant="contained" onClick={() => setOpen(true)} sx={{ mt: 1 }}>Adicionar Produto</Button>
       {products.map((product) => (
         <Grid item xs={12} sm={6} md={4} key={product.id}>
-          <Card  sx={{ maxWidth: 200, backgroundColor: "#e8f5e9", borderRadius: 2, cursor: "pointer" }} >
+          <Card  sx={{ maxWidth: 200, backgroundColor: "#e8f5e9", borderRadius: 2, cursor: "pointer", mt:4 }} >
       <CardMedia 
           component="img"
           height="140"
@@ -55,6 +58,7 @@ function MyProducts() {
     </Grid>
       ))}
     </Box>
+    <ProductModal open={open} onClose={() => setOpen(false)} />
     </Container>
 
   );
