@@ -43,32 +43,34 @@ function ProductFeedbacks() {
   };
 
   return (
-    <Box>
-      <Typography variant="h5" gutterBottom>Feedbacks Recebidos</Typography>
-      {feedbacks.map((feedback) => (
-        <Card key={feedback.id} sx={{ mb: 2, p: 2 }}>
-          <CardContent>
-            <Rating value={feedback.reating} readOnly />
-            <Typography>{feedback.description}</Typography>
-            <TextField
-              fullWidth
-              label="Responder Feedback"
-              value={responses[feedback.id] || ""}
-              onChange={(e) => handleResponseChange(feedback.id, e.target.value)}
-              sx={{ mt: 2 }}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ mt: 1 }}
-              onClick={() => handleSubmitResponse(feedback.id)}
-            >
-              Enviar Resposta
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
-    </Box>
+    <Container sx={{ mt: 1 }}>
+      <Box>
+        <Typography variant="h5" gutterBottom>Feedbacks Recebidos</Typography>
+        {feedbacks.map((feedback) => (
+          <Card key={feedback.id} sx={{ mb: 2, p: 2 }}>
+            <CardContent>
+              <Rating value={feedback.reating} readOnly />
+              <Typography>{feedback.description}</Typography>
+              <TextField
+                fullWidth
+                label="Responder Feedback"
+                value={responses[feedback.id] || ""}
+                onChange={(e) => handleResponseChange(feedback.id, e.target.value)}
+                sx={{ mt: 2 }}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 1 }}
+                onClick={() => handleSubmitResponse(feedback.id)}
+              >
+                Enviar Resposta
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </Container>
   );
 }
 
