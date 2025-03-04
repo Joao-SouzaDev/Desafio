@@ -25,5 +25,5 @@ Siga os passos abaixo para iniciar o ambiente completo com Docker Compose:
    git clone [https://github.com/seu-usuario/desafio.git]
    cd desafio
 2 . Construa o projeto
-    ```bash
+   ```bash
       docker-compose up --build 
