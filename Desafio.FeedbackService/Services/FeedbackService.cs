@@ -6,9 +6,11 @@ namespace Desafio.FeedbackService.Services
     public class FeedbackService
     {
         private readonly IFeedbackRepository _feedbackRepository;
-        public FeedbackService(IFeedbackRepository feedbackRepository)
+        private readonly MqServices _mqServices;
+        public FeedbackService(IFeedbackRepository feedbackRepository, MqServices mqServices)
         {
             _feedbackRepository = feedbackRepository;
+            _mqServices = mqServices;
         }
         public async Task CreateFeedbackAsync(Feedback request)
         {
@@ -19,6 +21,8 @@ namespace Desafio.FeedbackService.Services
                     throw new ArgumentNullException(nameof(request));
                 }
                 await _feedbackRepository.CreateAsync(request);
+                await _mqServices.SendMessageAsync(new NotificationMessage { Queue = string.Empty, Body = "Obrigado pelo feedback, essa situação foi enviada para o criado do produto. Assim que possível você será respondido(a)", To = request.Email,Subject= "Feedback" });
+                
             }
             catch (ArgumentNullException ex)
             {

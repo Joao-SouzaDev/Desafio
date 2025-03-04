@@ -13,8 +13,9 @@ function Login() {
       e.preventDefault();
       try {
         const response = await axios.post("/Auth/login", { email, password });
-        Cookies.set("token", response.data, { secure: true, sameSite: "Strict" });
-        navigate("/");
+        Cookies.set("token", response.data.token, { secure: true, sameSite: "Strict" });
+        Cookies.set("userId", response.data.userId,{ secure: true, sameSite: "Strict" })
+        navigate("/productmng");
       } catch (error) {
         console.error("Erro ao fazer login", error);
       }

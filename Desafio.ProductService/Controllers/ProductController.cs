@@ -43,14 +43,13 @@ namespace Desafio.ProductService.Controllers
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
         [Authorize]
-        [HttpGet("{ownerId}")]
+        [HttpGet("{ownerId}/products")]
         public async Task<IActionResult> GetByOwnerId(Guid ownerId)
         {
             var products = await _productService.GetProductsByOwnerId(ownerId);
             var productsResponse = _mapper.Map<IEnumerable<Product>, IEnumerable<GetProductResponse>>(products);
             return Ok(productsResponse);
         }
-        // GET api/<ProductController>/5
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
@@ -61,7 +60,6 @@ namespace Desafio.ProductService.Controllers
             return Ok(productResponse);
         }
         [Authorize]
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

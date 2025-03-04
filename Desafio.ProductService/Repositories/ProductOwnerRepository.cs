@@ -29,7 +29,10 @@ namespace Desafio.ProductService.Repositories
         {
             return _context.ProductOwners.AsEnumerable();
         }
-
+        public async Task<ProductOwner?> GetByUserId(Guid userId)
+        {
+            return await _context.ProductOwners.FirstOrDefaultAsync(x => x.UserId == userId);
+        }
         public async Task<ProductOwner?> GetByIdAsync(Guid productOwnerId)
         {
             return await _context.ProductOwners.FindAsync(productOwnerId);

@@ -53,8 +53,8 @@ namespace Desafio.AuthService.Controllers
         {
             try
             {
-                var token = await _userRepository.Login(request.Email, request.Password);
-                return Ok(token);
+                var access = await _userRepository.Login(request.Email, request.Password);
+                return Ok(access);
             }
             catch (UnauthorizedAccessException e)
             {

@@ -6,7 +6,8 @@
       "serviceActions": {
         "desafio.feedbackservice": "StartDebugging",
         "desafio.productservice": "StartDebugging",
-        "desafio.authservice": "StartDebugging"
+        "desafio.authservice": "StartDebugging",
+        "desafio.notificacaoservice": "StartDebugging"
       }
     }
   }

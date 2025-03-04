@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Desafio.ProductService.Data.DTO;
 using Desafio.ProductService.Repositories.Interfaces;
+using Desafio.ProductService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,46 +13,18 @@ namespace Desafio.ProductService.Controllers
     [ApiController]
     public class ProductOwnerController : ControllerBase
     {
-        private readonly IProductOwnerRepository _productOwnerRepo;
+        private readonly ProductOwnerService _productOwnerService;
         private readonly IMapper _mapper;
-        public ProductOwnerController(IProductOwnerRepository productOwnerRepo, IMapper mapper)
+        public ProductOwnerController(ProductOwnerService productOwnerService, IMapper mapper)
         {
-            _productOwnerRepo = productOwnerRepo;
+            _productOwnerService = productOwnerService;
             _mapper = mapper;
         }
-
-        // GET: api/<ProductOwner>
-        [HttpGet]
-        [Authorize]
-        public IEnumerable<string> Get()
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetByUserId(Guid userId)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ProductOwner>/5
-        [HttpGet("{id}")]
-        [Authorize]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ProductOwner>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<ProductOwner>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<ProductOwner>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var productOwner = await _productOwnerService.GetByUserId(userId);
+            return Ok(productOwner);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Desafio.AuthService.Models;
+﻿using Desafio.AuthService.Data.DTO;
+using Desafio.AuthService.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace Desafio.AuthService.Services
@@ -39,7 +40,7 @@ namespace Desafio.AuthService.Services
         }
 
         // Metodo de login
-        public async Task<string> Login(string email,string password)
+        public async Task<GetAccesResponse> Login(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
@@ -49,7 +50,8 @@ namespace Desafio.AuthService.Services
             var result = await _signInManager.PasswordSignInAsync(user,password,false,false);
             if (result.Succeeded)
             {
-                return _tokenService.GenerateJwtToken(user);
+                var getAccess = new GetAccesResponse { Token = _tokenService.GenerateJwtToken(user), UserId = user.Id };
+                return getAccess;
             }
             throw new UnauthorizedAccessException("Invalid login attempt");
         }

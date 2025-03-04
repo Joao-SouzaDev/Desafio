@@ -18,6 +18,10 @@ namespace Desafio.ProductService.Services
         {
             return _productOwnerRepository.GetAll();
         }
+        public Task<ProductOwner?> GetByUserId(Guid userId)
+        {
+            return _productOwnerRepository.GetByUserId(userId);
+        }
         public async Task<ProductOwner?> GetProductOwnerById(Guid productOwnerId)
         {
             return await _productOwnerRepository.GetByIdAsync(productOwnerId);

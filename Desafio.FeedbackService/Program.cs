@@ -1,5 +1,6 @@
 using Desafio.FeedbackService.Helpers;
 using Desafio.FeedbackService.Migrations;
+using Desafio.FeedbackService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var corsPolicy = "_myAllowSpecificOrigins";
@@ -23,6 +24,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDataContexts(builder.Configuration);
 builder.Services.AddServices(builder.Configuration);
+builder.Services.AddSingleton<MqServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

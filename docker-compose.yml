@@ -25,7 +25,15 @@ services:
       dockerfile: Desafio.AuthService/Dockerfile
     ports:
       - "5000:5000"
-      - "5001:5001"  
+      - "5001:5001"
+  desafio.notificacaoservice:
+    image: ${DOCKER_REGISTRY-}desafionotificacaoservice
+    build:
+      context: .
+      dockerfile: Desafio.NotificacaoService/Dockerfile
+    ports:
+     - "5010:5010"
+     - "5011:5011"
   desafio.database:
    image: postgres:latest
    container_name: desafio.database
@@ -46,6 +54,9 @@ services:
       - "15672:15672"
     volumes:
      - ./.containers/desafio.rabbitmq:/var/lib/rabbitmq
+
+
+
 
 
 
